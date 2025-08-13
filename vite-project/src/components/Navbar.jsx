@@ -14,7 +14,7 @@ export default function Navbar({ search, setSearch }) {
           placeholder="Search..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="px-3 py-1 rounded-md text-black bg-white pr-10 w-150"
+          className="px-3 py-1 rounded-md text-black bg-white pr-10 sm:w-48  w-150"
         />
         <FaSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 " />
       </div>
