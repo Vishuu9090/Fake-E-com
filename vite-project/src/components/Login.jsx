@@ -1,14 +1,28 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log("Login with:", email, password);
-    alert(`Logged in as ${email}`);
+
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+
+    if (!storedUser) {
+      alert("No account found. Please sign up first.");
+      return;
+    }
+
+    if (storedUser.email === email && storedUser.password === password) {
+      localStorage.setItem("isLoggedIn", "true"); // mark user as logged in
+      alert(`Welcome back, ${storedUser.name}!`);
+      navigate("/"); // redirect to home page
+    } else {
+      alert("Invalid email or password!");
+    }
   };
 
   return (

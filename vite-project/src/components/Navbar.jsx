@@ -2,7 +2,12 @@ import React from "react";
 import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-export default function Navbar({ search, setSearch }) {
+export default function Navbar({ search, setSearch, user }) {
+  const getInitial = (name) => {
+    if (!name) return "";
+    return name.charAt(0).toUpperCase();
+  };
+
   return (
     <nav className="bg-gray-900 text-white px-6 py-3 flex items-center justify-between flex-wrap gap-3">
       {/* Logo */}
@@ -21,24 +26,41 @@ export default function Navbar({ search, setSearch }) {
       </div>
 
       {/* Buttons */}
-      <div className="flex gap-3">
-        <Link to="/"className="bg-white text-black px-3 py-1 rounded hover:bg-gray-200">
+      <div className="flex gap-3 items-center">
+        <Link
+          to="/"
+          className="bg-white text-black px-3 py-1 rounded hover:bg-gray-200"
+        >
           Homepage 🏠
         </Link>
 
-        <Link to="/login"className="bg-white text-black px-3 py-1 rounded hover:bg-gray-200">
-          Login 😊
-        </Link>
+        {user ? (
+          <div
+            className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-lg font-bold"
+            title={user}
+          >
+            {getInitial(user)}
+          </div>
+        ) : (
+          <Link
+            to="/login"
+            className="bg-white text-black px-3 py-1 rounded hover:bg-gray-200"
+          >
+            Login 😊
+          </Link>
+        )}
 
-        {/* <Link to="/signup"className="bg-white text-black px-3 py-1 rounded hover:bg-gray-200">
-          Sign Up ✍️
-        </Link> */}
-
-        <Link to="/wishlist"className="bg-white text-black px-3 py-1 rounded hover:bg-gray-200">
+        <Link
+          to="/wishlist"
+          className="bg-white text-black px-3 py-1 rounded hover:bg-gray-200"
+        >
           Wishlist ❤️
         </Link>
 
-        <Link to="/cart" className="bg-white text-black px-3 py-1 rounded hover:bg-gray-200">
+        <Link
+          to="/cart"
+          className="bg-white text-black px-3 py-1 rounded hover:bg-gray-200"
+        >
           Cart 🛒
         </Link>
       </div>

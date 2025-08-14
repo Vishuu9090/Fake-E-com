@@ -1,15 +1,21 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSignup = (e) => {
     e.preventDefault();
-    console.log("Signup with:", name, email, password);
+
+    // Save user data in localStorage
+    const userData = { name, email, password };
+    localStorage.setItem("user", JSON.stringify(userData));
+
     alert(`Account created for ${name}`);
+    navigate("/login");
   };
 
   return (
