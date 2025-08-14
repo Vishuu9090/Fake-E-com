@@ -5,6 +5,7 @@ import Products from "./components/Products";
 import Cart from "./components/Cart";
 import Wishlist from "./components/Wishlist";
 import Login from "./components/Login";
+import Signup from "./components/Signup";
 export default function App() {
   const [search, setSearch] = useState("");
 
@@ -17,6 +18,7 @@ export default function App() {
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
       </Routes>
     </Router>
   );
