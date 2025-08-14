@@ -113,7 +113,7 @@ export default function Products({ search }) {
             {/* Add to Cart Button */}
             <button
               onClick={() => addToCart(product)}
-              className="mt-3 bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded flex items-center gap-2"
+              className="mt-3 bg-gray-700 hover:bg-gray-800 text-white px-3 py-1 rounded flex items-center gap-2"
             >
               <FaCartPlus /> Add to Cart
             </button>
