@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function Login() {
+export default function Login({ setUser }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
@@ -17,9 +18,12 @@ export default function Login() {
     }
 
     if (storedUser.email === email && storedUser.password === password) {
-      localStorage.setItem("isLoggedIn", "true"); // mark user as logged in
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("loggedInUser", storedUser.name);
+
+      setUser(storedUser.name); // ✅ update app state
       alert(`Welcome back, ${storedUser.name}!`);
-      navigate("/"); // redirect to home page
+      navigate("/");
     } else {
       alert("Invalid email or password!");
     }
@@ -42,14 +46,23 @@ export default function Login() {
           required
         />
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="w-full px-3 py-2 mb-3 border rounded"
-          required
-        />
+        <div className="relative ">
+          <input
+            type={showPassword ? "text" : "password"}
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className=" flex justify-center items-center  w-full px-3 py-2 mb-3 border rounded pr-16"
+            required
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className=" absolute right-2 top-1/2 -translate-y-1/2 text-sm text-blue-500"
+          >
+            {showPassword ? "Hide" : "Show"}
+          </button>
+        </div>
 
         <button
           type="submit"

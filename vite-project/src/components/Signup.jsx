@@ -5,16 +5,15 @@ export default function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // ✅ toggle state
   const navigate = useNavigate();
 
   const handleSignup = (e) => {
     e.preventDefault();
 
-    // Save user data in localStorage
     const userData = { name, email, password };
     localStorage.setItem("user", JSON.stringify(userData));
-
-    alert(`Account created for ${name}`);
+    alert("Signup successful! Please log in.");
     navigate("/login");
   };
 
@@ -28,7 +27,7 @@ export default function Signup() {
 
         <input
           type="text"
-          placeholder="Full Name"
+          placeholder="Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
           className="w-full px-3 py-2 mb-3 border rounded"
@@ -44,14 +43,26 @@ export default function Signup() {
           required
         />
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="w-full px-3 py-2 mb-3 border rounded"
-          required
-        />
+        {/* ✅ Password with toggle */}
+        <div className="relative">
+          <input
+            type={showPassword ? "text" : "password"}
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full px-3 py-2 mb-3 border rounded pr-10"
+            required
+          />
+
+          {/* Toggle Button */}
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-2 top-2 text-sm text-blue-500 hover:underline"
+          >
+            {showPassword ? "Hide" : "Show"}
+          </button>
+        </div>
 
         <button
           type="submit"
