@@ -11,27 +11,22 @@ export default function App() {
   const [search, setSearch] = useState("");
   const [user, setUser] = useState(null);
 
-  // ✅ Load user from localStorage when page refreshes
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
-    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
 
-    if (storedUser && isLoggedIn === "true") {
-      setUser(storedUser.name); // only keep the name
+    if (storedUser && isLoggedIn) {
+      setUser(storedUser.name);
     }
   }, []);
 
   return (
     <Router>
-      {/* ✅ Pass user and setUser to Navbar */}
       <Navbar search={search} setSearch={setSearch} user={user} setUser={setUser} />
-
       <Routes>
-        <Route path="/" element={<Products search={search} />} />
-        <Route path="/wishlist" element={<Wishlist />} />
-        <Route path="/cart" element={<Cart />} />
-
-        {/* ✅ Login can set user after successful login */}
+        <Route path="/" element={<Products search={search} user={user} />} />
+        <Route path="/wishlist" element={<Wishlist user={user} />} />
+        <Route path="/cart" element={<Cart user={user} />} />
         <Route path="/login" element={<Login setUser={setUser} />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>
