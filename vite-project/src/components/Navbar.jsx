@@ -3,14 +3,20 @@ import { FaSearch } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Navbar({ search, setSearch, user, setUser }) {
-  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+  const isLoggedIn = !!user;
   const navigate = useNavigate();
 
   const getInitial = (name) => (name ? name.charAt(0).toUpperCase() : "");
 
   const handleLogout = () => {
-    localStorage.setItem("isLoggedIn", "false");
+    // Reset guest cart & wishlist
+    localStorage.removeItem("cart_guest");
+    localStorage.removeItem("wishlist_guest");
+
+    // Keep logged-in data saved automatically
     setUser(null);
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("loggedInUser");
     navigate("/login");
   };
 

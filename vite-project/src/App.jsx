@@ -11,11 +11,11 @@ export default function App() {
   const [search, setSearch] = useState("");
   const [user, setUser] = useState(null);
 
+  // Load logged-in user on mount
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
-    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-
-    if (storedUser && isLoggedIn) {
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    if (storedUser && isLoggedIn === "true") {
       setUser(storedUser.name);
     }
   }, []);
