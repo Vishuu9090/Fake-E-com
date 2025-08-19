@@ -35,7 +35,7 @@ export default function Login({ setUser }) {
         <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} className="w-full px-3 py-2 mb-3 border rounded" required />
 
         <div className="relative">
-          <input type={showPassword ? "text" : "password"} placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} className="w-full px-3 py-2 mb-3 border rounded pr-16" required />
+          <input type={showPassword ? "text" : "password"} placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} className="w-full flex justify-center items-center px-3 py-2 mb-3 border rounded pr-16" required />
           <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-2 top-1/2 -translate-y-1/2 text-sm text-blue-500">
             {showPassword ? "Hide" : "Show"}
           </button>
